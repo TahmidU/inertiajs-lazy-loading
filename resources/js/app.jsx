@@ -1,9 +1,14 @@
 import { createInertiaApp } from '@inertiajs/react'
 import { createRoot } from 'react-dom/client'
-import {resolvePageComponent} from 'laravel-vite-plugin/inertia-helpers';
+import { resolvePageComponent } from 'laravel-vite-plugin/inertia-helpers';
+
+import { setChonkyDefaults } from "chonky";
+import { ChonkyIconFA } from "chonky-icon-fontawesome";
+
+setChonkyDefaults({ iconComponent: ChonkyIconFA });
 
 createInertiaApp({
-  resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`,import.meta.glob('./Pages/**/*.jsx')),
+  resolve: (name) => resolvePageComponent(`./Pages/${name}.jsx`, import.meta.glob('./Pages/**/*.jsx')),
   setup({ el, App, props }) {
     createRoot(el).render(<App {...props} />)
   },

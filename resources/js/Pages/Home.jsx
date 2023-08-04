@@ -1,5 +1,14 @@
-export default function Home(){
+import { useState } from "react";
+import FileBrowser from "../Components/FileBrowser";
+
+export default function Home() {
+    const [showBrowser, setBrowserVisibility] = useState(false);
+
     return (
-        <span>THIS is the home page</span>
+        <article>
+            <button onClick={() => setBrowserVisibility((prev) => !prev)}>Click Me</button>
+            {showBrowser && <FileBrowser />}
+        </article>
+
     );
 }
