@@ -24,13 +24,13 @@ jobs:
       - name: Upload package to S3 bucket
         run: aws s3 cp deploy_package.zip s3://inertiajs-deploy/
 
-      #- name: Create new ElasticBeanstalk Application Version
-        #run: |
-          #aws elasticbeanstalk create-application-version \
-          #--application-name InertiaJS \
-          #--source-bundle S3Bucket="inertiajs-deploy",S3Key="deploy_package.zip" \
-          #--version-label "ver-${{ github.sha }}" \
-          #--description "commit-sha-${{ github.sha }}"
+      - name: Create new ElasticBeanstalk Application Version
+        run: |
+          aws elasticbeanstalk create-application-version \
+          --application-name InertiaJS \
+          --source-bundle S3Bucket="inertiajs-deploy",S3Key="deploy_package.zip" \
+          --version-label "ver-${{ github.sha }}" \
+          --description "commit-sha-${{ github.sha }}"
 
-      #- name: Deploy new ElasticBeanstalk Application Version
-        #run: aws elasticbeanstalk update-environment --environment-name InertiaJS-env --version-label "ver-${{ github.sha }}"
+      - name: Deploy new ElasticBeanstalk Application Version
+        run: aws elasticbeanstalk update-environment --environment-name InertiaJS-env --version-label "ver-${{ github.sha }}"
